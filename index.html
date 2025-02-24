@@ -1,0 +1,370 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trường THPT Lê Hoàn</title>
+    <style>
+        /* Reset cơ bản */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
+        header {
+            position: relative;
+            background: url('https://scontent.fdad1-4.fna.fbcdn.net/v/t39.30808-6/252346856_230488985845476_8988232114532104736_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=AeCVrCycH5MQ7kNvgEaqDWX&_nc_oc=AdhrWApgd0c61Ih1SPcbnJVbWTBOJPT-vgXnkpLHkSYp9uWV8cMIvzPBRWOgMJCR3h_1KKr9hDq9OvtUz-KyQAZe&_nc_zt=23&_nc_ht=scontent.fdad1-4.fna&_nc_gid=AbTIg3t8as6yExT6uvuuGH5&oh=00_AYC-yreZ1osW8YCoTQZuFRANtwRmCLkabczPY41-og7e7Q&oe=67C1D42A') no-repeat center center/cover;
+            height: 100vh;
+            color: white;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-attachment: fixed;
+            background-size: cover;
+            animation: fadeInHeader 2s ease-out;
+        }
+
+        header .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        header h1, header p {
+            position: relative;
+            z-index: 2;
+            animation: slideIn 1s ease-out;
+        }
+
+        header h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+
+        header p {
+            font-size: 1.6rem;
+            margin-top: 20px;
+        }
+
+        /* Thanh điều hướng */
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        nav a {
+            color: white;
+            padding: 14px 25px;
+            text-decoration: none;
+            text-align: center;
+            font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.4s ease;
+        }
+
+        nav a:hover {
+            color: #4CAF50;
+        }
+
+        nav a:after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background-color: #4CAF50;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+
+        nav a:hover:after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Các phần nội dung */
+        section {
+            padding: 80px 20px;
+            margin: 40px auto;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            animation: fadeIn 2s ease-out;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            color: #4CAF50;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: 600;
+            animation: slideIn 1s ease-out;
+        }
+
+        /* Các card sự kiện */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card img {
+            width: 500px;
+            border-radius: 8px;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .card h3 {
+            font-size: 1.8rem;
+            color: #4CAF50;
+            margin-top: 15px;
+        }
+
+        .card p {
+            color: #555;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        /* Hiệu ứng parallax */
+        .parallax {
+            height: 300px;
+            background-image: url('https://via.placeholder.com/1500x800');
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+            animation: fadeIn 3s ease-out;
+            position: relative;
+            z-index: 0;
+        }
+
+        .parallax-link {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            z-index: 2;
+        }
+
+        /* Bảng lịch học */
+        .schedule {
+            margin: 20px auto;
+            width: 80%;
+            text-align: center;
+        }
+
+        .schedule h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table th, table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        table td {
+            background-color: #fff;
+            color: #333;
+        }
+
+        table tr:nth-child(even) td {
+            background-color: #f2f2f2;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInHeader {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            header p {
+                font-size: 1.4rem;
+            }
+
+            nav {
+                flex-direction: column;
+            }
+
+            nav a {
+                padding: 12px;
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 50px 10px;
+            }
+
+            .card-container {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+    <div class="overlay"></div>
+    <h1>Trường THPT Lê Hoàn</h1>
+    <p>Chào mừng đến với môi trường học tập sáng tạo và phát triển!</p>
+</header>
+
+    <nav>
+        <a href="#home">Trang Chủ</a>
+        <a href="#about">Giới Thiệu</a>
+        <a href="#departments">Sự Kiện</a>
+        <a href="#schedule">Lịch Học</a>
+        <a href="#contact">Liên Hệ</a>
+    </nav>
+
+    <section id="home">
+<div class="card">
+        <h2>Trang Chủ</h2>
+        <p>Trường THPT Lê Hoàn luôn cam kết mang lại cho học sinh một môi trường học tập lý tưởng.</p>
+	<img src="https://r73troypb4obj.vcdn.cloud/website02/uploads/pictures/62b2cb5b1a1b850542cd9b86/content_danh-gia-truong-thpt-le-hoan-gia-lai-co-tot-khong__3_.jpg">
+	</section>
+</div>
+    <section id="about">
+	<div class="card">
+        <h2>Giới Thiệu</h2>
+        <p>Trường THPT Lê Hoàn được thành lập với mục tiêu tạo ra một môi trường học tập sáng tạo.</p>
+    	<img src="https://thptlehoan.gialai.edu.vn/upload/20409/fck/files/4(31).jpg"
+	</div>
+	</section>
+
+    <section class="parallax">
+        <h2>Sự kiện</h2>
+        <div class="card-container">
+            <div class="card">
+                <a href="https://www.facebook.com/share/p/15DZpdhThg/" class="parallax-link"></a>
+                <h3>GIẢI BÓNG ĐÁ NAM</h3>
+                <p>Tổ chức giải Bóng đá nam nhằm chào mừng 95 năm ngày thành lập Đảng Cộng Sản Việt Nam.</p>
+        	<img src="https://scontent.fdad1-1.fna.fbcdn.net/v/t39.30808-6/480683415_989372499957117_7974005327357384002_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=127cfc&_nc_ohc=yl3oKYDNLuoQ7kNvgFKl0F0&_nc_oc=AdgPPjp3A95_87GyHnHhMJVF-USDBxo62gScnv90ZxpSVEqpL1n_Ag560jnBip_fPr4&_nc_zt=23&_nc_ht=scontent.fdad1-1.fna&_nc_gid=AtRmEyyMrbgsEi3S_xq4qA6&oh=00_AYAs8bi1K9gCr8HhOlt7I9-WI2vAaV4E2aVgKgN62etjJQ&oe=67C254C8">    
+	</div>
+            <div class="card">
+                <a href="https://www.facebook.com/share/p/1Ch9LERu73/" class="parallax-link"></a>
+                <h3>TƯ VẤN, TUYỂN SINH - HƯỚNG NGHIỆP</h3>
+                <p>Định hướng chọn trường, chọn ngành và chọn nghề cho học sinh.</p>
+		<img src="https://scontent.fdad1-1.fna.fbcdn.net/v/t39.30808-6/476798672_982034590690908_183970961047354842_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=127cfc&_nc_ohc=sCAFO6gYnUQQ7kNvgE5N7YF&_nc_oc=Adh2QgcqTjtu5PGi8sQGmpELvIJpGA_S9aZzvS9uHTUUGR0gkS3qWDnGsGHWbjpFZc4&_nc_zt=23&_nc_ht=scontent.fdad1-1.fna&_nc_gid=AyldrF-W-XbUTH-XgsU_lLd&oh=00_AYAjR9EjsiZHD009xHr4Nq4HwHIIp8rH5LqLW8pDug9Nug&oe=67C22D7C">
+            </div>
+        </div>
+    </section>
+<br><br><br><br><br><br><br><br><br><br><br>
+<section id="schedule">
+	<div class="card">
+        <h2>Thời khóa biểu</h2>
+        <p></p>
+    	<img src="Buoisang.jpg">
+	<img src="Buoichieu.jpg">
+	</div>
+	</section>
+
+<br><br><br><br><br><br><br><br><br><br><br>
+    <footer>
+        <p>Trường THPT Lê Hoàn &copy; 2025. Thị Tuyết.</p>
+    </footer>
+</body>
+</html>
